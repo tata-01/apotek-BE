@@ -24,7 +24,7 @@ if ($q) {
     'NAMA' => $nama
     ];
 } else {
-  $res['status'] = 401;
+  $res['status'] = 400;
   $res['msg'] = "Gagal membuat kategori";
   $res['body']['error'] = "Kesalahan validasi input";
 }

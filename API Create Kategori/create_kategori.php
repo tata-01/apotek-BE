@@ -11,6 +11,7 @@ $res = [
   ]
       ];
 
+      
 $kode = $_POST['KODE'];
 $nama = $_POST['NAMA'];
 $q = mysqli_query($conn, "INSERT INTO kategori (KODE,NAMA) VALUES ('$kode','$nama')");

@@ -1,54 +1,50 @@
 <?php
 $koneksi = mysqli_connect('localhost', 'root', '', 'apotek');
 
+
 $res = [
-    "status" => 200,
-    "msg" => "succses",
-    "body" => [
-        "data" => [],
-    ],
+  "status" => 200,
+  "msg" => "",
+  "body" => [
+    "data" => [
+      [
+        "KODE" => "",
+        "NAMA" => "",
+        "KODE_KATEGORI" => "",
+        "GAMBAR" => "",
+        "HARGA" => ""        
+      ]
+    ]
+  ]
 ];
 
-// Check if an ID is provided
-if (isset($_GET['id'])) {
-   $kode = $_GET['id'];
+$q = mysqli_query($koneksi, "SELECT * FROM menu");
+// Inisialisasi array untuk menyimpan data
+$dataArray = array();
 
-    $stmt = $koneksi->prepare("SELECT * FROM kategori WHERE kode = ?");
-    $stmt->bind_param("i",$kode);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $row = $result->fetch_assoc();
+// Mengambil semua baris yang sesuai dari hasil queri
+while ($row = mysqli_fetch_array($q)) {
+  // Menambahkan data dari setiap baris ke dalam array
+  $data = array(
+    'KODE' => $row['KODE'],
+    'NAMA' => $row['NAMA'],
+    'KODE_KATEGORI' => $row['KODE_KATEGORI'],
+    'GAMBAR' => $row['GAMBAR'],
+    'HARGA' => $row['HARGA']    
+  );
 
-    if ($row) {
-        $res['body']['data'] = $row;
-    } else {
-        $res['status'] = 400;
-        $res['msg'] = "Data tidak ditemukan";
-    }
+  // Menambahkan data ke dalam array utama
+  $dataArray[] = $data;
+}
 
-    $stmt->close();
+// Memeriksa apakah ada data yang ditemukan
+if (!empty($dataArray)) {
+  $res['status'] = 200;
+  $res['msg'] = "Data berhasil diambil";
+  $res['body']['data'] = $dataArray;
 } else {
-    // Fetch all categories if no ID is provided
-    $q = mysqli_query($koneksi, "SELECT * FROM kategori");
-
-    // Inisialisasi array untuk menyimpan data
-    $dataArray = array();
-
-    while ($row = mysqli_fetch_array($q)) {
-        $data = array(
-            'KODE' => $row['KODE'],
-            'NAMA' => $row['NAMA'],
-        );
-        $dataArray[] = $data;
-    }
-
-    if (!empty($dataArray)) {
-        $res['body']['data'] = $dataArray;
-    } else {
-        $res['status'] = 400;
-        $res['msg'] = "Data tidak ditemukan";
-    }
+  $res['status'] = 400;
+  $res['msg'] = "Data tidak ditemukan";
 }
 
 echo json_encode($res);
-?>

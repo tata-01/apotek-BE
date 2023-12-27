@@ -1,6 +1,5 @@
 <?php
 $conn = mysqli_connect('localhost', 'root', '', 'apotek');
-
 $res = [
   "status" => 200,
   "msg" => "",

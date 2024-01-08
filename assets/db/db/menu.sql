@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Waktu pembuatan: 24 Des 2023 pada 06.46
--- Versi server: 10.4.28-MariaDB
--- Versi PHP: 8.0.28
+-- Host: localhost:3306
+-- Generation Time: Jan 08, 2024 at 08:50 AM
+-- Server version: 8.0.30
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,18 +18,21 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `kategori`
+-- Database: `apotek`
 --
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `kategori`
+-- Table structure for table `menu`
 --
 
-CREATE TABLE `kategori` (
-  `KODE` int(11) NOT NULL,
-  `NAMA` varchar(32) NOT NULL
+CREATE TABLE `menu` (
+  `kode` varchar(64) COLLATE utf8mb4_general_ci NOT NULL,
+  `nama` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `kode_kategori` varchar(64) COLLATE utf8mb4_general_ci NOT NULL,
+  `gambar` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `harga` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -37,10 +40,10 @@ CREATE TABLE `kategori` (
 --
 
 --
--- Indeks untuk tabel `kategori`
+-- Indexes for table `menu`
 --
-ALTER TABLE `kategori`
-  ADD PRIMARY KEY (`KODE`);
+ALTER TABLE `menu`
+  ADD PRIMARY KEY (`kode`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

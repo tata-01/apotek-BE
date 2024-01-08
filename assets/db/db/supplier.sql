@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Waktu pembuatan: 24 Des 2023 pada 06.46
--- Versi server: 10.4.28-MariaDB
--- Versi PHP: 8.0.28
+-- Host: localhost:3306
+-- Generation Time: Jan 08, 2024 at 08:57 AM
+-- Server version: 8.0.30
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,21 +18,20 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `menu`
+-- Database: `apotek`
 --
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `menu`
+-- Table structure for table `supplier`
 --
 
-CREATE TABLE `menu` (
-  `KODE` int(11) NOT NULL,
-  `NAMA` varchar(64) NOT NULL,
-  `KODE_KATEGORI` int(11) NOT NULL,
-  `GAMBAR` text NOT NULL,
-  `HARGA` int(11) NOT NULL
+CREATE TABLE `supplier` (
+  `kode` int NOT NULL,
+  `nama` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `alamat` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `no_telp` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -40,10 +39,10 @@ CREATE TABLE `menu` (
 --
 
 --
--- Indeks untuk tabel `menu`
+-- Indexes for table `supplier`
 --
-ALTER TABLE `menu`
-  ADD PRIMARY KEY (`KODE`);
+ALTER TABLE `supplier`
+  ADD PRIMARY KEY (`kode`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

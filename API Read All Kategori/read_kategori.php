@@ -9,13 +9,13 @@ $response = [
     ]
 ];
 
-if (!isset($koneksi)) {
+if (!isset($conn)) {
 
     $response['status'] = 400;
     $response['msg'] = 'error';
 } else {
 
-    $result = mysqli_query($koneksi, "SELECT * FROM kategori");
+    $result = mysqli_query($conn, "SELECT * FROM kategori");
     $row = mysqli_fetch_all($result, MYSQLI_ASSOC);
     $response['status'] = 200;
     $response['msg'] = 'success';

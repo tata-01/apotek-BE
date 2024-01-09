@@ -1,33 +1,28 @@
 <?php
 
+
+$koneksi = mysqli_connect('localhost', 'root', '', 'apotek');
+
 $response = [
-    'status' => '200',
-    'msg' => 'Data berhasil dihapus'
+    'status' => '',
+    'msg' => '',
+    'body' => [
+        'data' => []
+    ]
 ];
 
-$koneksi = mysqli_connect('localhost', 'root', '', 'cafe');
+$kode = $_POST['kode'];
 
-if ($koneksi) {
-    $kode = isset($_POST['kode']) ? mysqli_real_escape_string($koneksi, $_POST['kode']) : '';
+$query = mysqli_query($koneksi, "DELETE FROM menu WHERE kode='$kode'");
 
-    if (!empty($kode)) {
-        $query = mysqli_query($koneksi, "DELETE FROM menu WHERE kode='$kode'");
-
-        if ($query) {
-            $response['status'] = 200;
-            $response['msg'] = 'Data berhasil dihapus';
-        } else {
-            $response['status'] = 400;
-            $response['msg'] = 'Gagal menghapus data';
-        }
+    if ($query) {
+        $response['status'] = 200;
+        $response['msg'] = 'Data berhasil dihapus';
+        $response['body']['data']['kode'] = $kode;
+    } else {
+        $response['status'] = 400;
+        $response['msg'] = 'Data gagal dihapus';
+        $response['body']['data']['kode'] = $kode;
     }
-
-    mysqli_close($koneksi);
-} else {
-    $response['status'] = 500;
-    $response['msg'] = 'Gagal terhubung ke database';
-}
-
-header('Content-Type: application/json');
 echo json_encode($response);
 ?>

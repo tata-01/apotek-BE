@@ -23,9 +23,9 @@ if($row == 1){
 } else {
 
     $response['status'] = 200;
-    $response['msg'] = 'data berhasil diinsert';
-    $response['body']['data']['kode'] = 'kode';
-    $response['body']['data']['nama'] = 'nama';
+    $response['msg'] = 'data berhasil  diinsert';
+    $response['body']['data']['kode']= $kode;
+    $response['body']['data']['nama'] = $nama;
     
     mysqli_query($conn, "INSERT INTO kategori (kode, nama) VALUES ('$kode', '$nama')");
 }

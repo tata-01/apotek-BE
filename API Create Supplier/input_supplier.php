@@ -9,10 +9,10 @@ $response = [
     ]
 ];
 
-$kode = $_POST['KODE'];
-$nama = $_POST['NAMA'];
-$alamat = $_POST['ALAMAT'];
-$no_handphone = $_POST['NO_HANDPHONE'];
+$kode = $_POST['kode'];
+$nama = $_POST['nama'];
+$alamat = $_POST['alamat'];
+$no_handphone = $_POST['no_telp'];
 
 
 
@@ -27,13 +27,13 @@ if ($row == 1) {
 
     $response['status'] = 200;
     $response['msg'] = 'Data Berhasil Diinput';
-    $response['body']['data']['KODE'] = $kode;
-    $response['body']['data']['NAMA'] = $nama;
-    $response['body']['data']['ALAMAT'] = $alamat;
-    $response['body']['data']['NO_HANDPHONE'] = $no_handphone;
+    $response['body']['data']['kode'] = $kode;
+    $response['body']['data']['nama'] = $nama;
+    $response['body']['data']['alamat'] = $alamat;
+    $response['body']['data']['no_telp'] = $no_handphone;
 
 
-    mysqli_query($koneksi, "INSERT INTO supplier (KODE, NAMA,ALAMAT,NO_HANDPHONE) VALUES ('$kode', '$nama','$alamat','$no_handphone')");
+    mysqli_query($koneksi, "INSERT INTO supplier (kode, nama,alamat,no_telp) VALUES ('$kode', '$nama','$alamat','$no_handphone')");
 }
 
 echo json_encode($response);

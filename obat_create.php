@@ -15,7 +15,6 @@ $response = [
     $kode_supplier = $_POST['kode_supplier'];
     $stock = $_POST['stock'];
     $harga = $_POST['harga'];
-    $desk = $_POST['desk'];
 
 // cek duplikat
 $query = mysqli_query($koneksi, "SELECT * FROM obat WHERE kode = '$kode'");
@@ -41,8 +40,7 @@ if($row == 1){
     $response['body']['data']['kode_supplier'] = $kode_supplier;
     $response['body']['data']['stock'] = $stock;
     $response['body']['data']['harga'] = $harga;
-    $response['body']['data']['desk'] = $desk;
-    mysqli_query($koneksi, "INSERT INTO obat (kode, nama, gambar, kode_kategori, kode_supplier, stock, harga, desk) VALUES ('$kode', '$nama', 'upload/$namaGambarBaru', '$kode_kategori', '$kode_supplier','$stock', '$harga', '$desk')");
+    mysqli_query($koneksi, "INSERT INTO obat (kode, nama, gambar, kode_kategori, kode_supplier, stock, harga) VALUES ('$kode', '$nama', 'upload/$namaGambarBaru', '$kode_kategori', '$kode_supplier','$stock', '$harga')");
 }
 
 echo json_encode($response);

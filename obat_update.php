@@ -11,6 +11,7 @@ $response = [
             'kode_kategori' => '',
             'kode_supplier' => '',
             'gambar' => '',
+            'stock' => '',
             'harga' => '',
         ]
     ]
@@ -26,8 +27,8 @@ if (!$koneksi) {
     $nama = $_POST['nama'];
     $kode_kategori = $_POST['kode_kategori'];
     $kode_supplier = $_POST['kode_supplier'];
+    $stock = $_POST['stock'];
     $harga = $_POST['harga'];
-    $desc = mysqli_real_escape_string($koneksi, $_POST['desc']);
 
     // cek apakah user pilih gambar baru atau tidak
     if ($_FILES["gambar"]["name"] != "") {
@@ -50,22 +51,16 @@ if (!$koneksi) {
     }
 
     $response['status'] = 200;
-    $response['msg'] = 'data berhasil diperbarui';
+    $response['msg'] = 'data berhasil diperbaharui';
     $response['body']['data']['kode'] = $kode;
     $response['body']['data']['nama'] = $nama;
+    $response['body']['data']['gambar'] = 'upload/'.$namaGambarBaru;
     $response['body']['data']['kode_kategori'] = $kode_kategori;
     $response['body']['data']['kode_supplier'] = $kode_supplier;
+    $response['body']['data']['stock'] = $stock;
     $response['body']['data']['harga'] = $harga;
-    $response['body']['data']['deskripsi'] = $desc;
 
-    mysqli_query($koneksi, "UPDATE obat 
-                            SET kode = '$kode', 
-                                nama = '$nama', 
-                                kode_kategori = '$kode_kategori',
-                                kode_supplier = '$kode_supplier',
-                                harga = '$harga',
-                                deskripsi = '$desc'
-                            WHERE kode = '$kode'");
+    mysqli_query($koneksi, "UPDATE `obat` SET `kode`='$kode',`nama`='$nama',`kode_kategori`='$kode_kategori',`kode_supplier`='$kode_supplier',`stock`='$stock',`harga`='$harga' WHERE 1");
 }
 
 echo json_encode($response);

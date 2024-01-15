@@ -1,25 +1,28 @@
 <?php
 include 'env.php';
+
 $response = [
     'status' => '',
     'msg' => '',
     'body' => [
-        'data' => []
+        'data' => [
+            'kode' => ''
+        ]
     ]
 ];
+
 $kode = $_POST['kode'];
-$nama = $_POST['nama'];
 
-$query = mysqli_query($koneksi, "DELETE FROM kategori WHERE KODE = '$kode'");
+if (!isset($koneksi)) {
 
-if ($query) {
-    $response['status'] = 200;
-    $response['msg'] = 'Data berhasil diinsert';
-    $response['body']['data']['kode'] = $kode;
-    $response['body']['data']['nama'] = $nama;
-} else {
     $response['status'] = 400;
-    $response['msg'] = 'Gagal membuat kategori';    
-}
+    $response['msg'] = 'data gagal dihapus';
+    $response['body']['data']['kode'] = $kode;
+} else {
 
+    mysqli_query($koneksi, "DELETE FROM kategori WHERE kode = '$kode'");
+    $response['status'] = 200;
+    $response['msg'] = 'data berhasil dihapus';
+    $response['body']['data']['kode'] = $kode;
+}
 echo json_encode($response);
